@@ -20,7 +20,12 @@
       Consumed Items
       <ul>
         <% @today_items_data[:items].each do |item| %>
-          <li><strong><%= item.name %></strong> <span class="t__small">at <%= item.created_at.strftime("%I:%M %p") %></span> <em><%= item.calories %></em> cals </li>
+          <li>
+            <strong><%= item.name %></strong> <span class="t__small">at <%= item.created_at.strftime("%I:%M %p") %></span>
+            <ul>
+              <li class="li__nested t__small"><em><%= item.calories %></em> cals</li>
+            </ul>
+          </li>
         <% end %>
         
       </ul>

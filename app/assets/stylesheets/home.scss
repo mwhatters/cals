@@ -12,6 +12,14 @@ div {
   -webkit-box-sizing: border-box;
 }
 
+ul ul {
+  margin-left: -30px;
+}
+
+.li__nested {
+  margin-bottom: 4px;
+}
+
 .vertical_spacer__5 {
   display: inline-block;
   width: 5px;
