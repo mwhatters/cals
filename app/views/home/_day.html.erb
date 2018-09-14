@@ -3,7 +3,7 @@
       <p>Total Cals: <%= data[:total_calories] %></p>
       <ul>
         <% data[:items].each do |item| %>
-          <li class="t__small"><%= item.name %> -- <%= item.calories %> calories</li>
+          <li class="t__small"><strong><%= item.name %></strong> <em><%= item.calories %></em> cals</li>
         <% end %>
       </ul>
     </div>
