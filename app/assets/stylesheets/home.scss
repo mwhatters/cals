@@ -22,8 +22,25 @@ div {
   color: gray;
 }
 
+.t__medium {
+  font-size: 12px;
+  color: darkslategrey;
+}
+
 .c__green {
   color: green;
+}
+
+.bc__good {
+  background-color: #C6F6BF;
+}
+
+.bc__warning {
+  background-color: lightgoldenrodyellow;
+}
+
+.bc__bad {
+  background-color: lightcoral;
 }
 
 .container {
