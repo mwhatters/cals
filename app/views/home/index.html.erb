@@ -9,12 +9,20 @@
 
   <div class="row_container">
     <h2 class="t__h2 c__green">Today (<%= Date.today.strftime("%A") %>) <span class="t__small"><%= Date.today %></span></h2>
+    <div class="content_container today__overview <%= threshold_class(calories: @today_items_data[:total_calories]) %>">
+      <strong>Overview</strong>
+      <p>Total Cals: <%= @today_items_data[:total_calories] %></p>
+      <hr>
+      <p class="t__medium">Desired Baseline: <%= Stats::BASELINE_CAL_COUNT %></p>
+    </div>
+    <div class="vertical_spacer__5"></div>
     <div class="content_container today__container">
-      Items
+      Consumed Items
       <ul>
         <% @today_items_data[:items].each do |item| %>
-          <li><strong><%= item.name %></strong> <em><%= item.calories %></em> cals</li>
+          <li><strong><%= item.name %></strong> <span class="t__small">at <%= item.created_at.strftime("%I:%M %p") %></span> <em><%= item.calories %></em> cals </li>
         <% end %>
+        
       </ul>
     </div>
     <div class="vertical_spacer__5"></div>
@@ -35,37 +43,30 @@
         </p>
       <% end %>
     </div>
-    <div class="vertical_spacer__5"></div>
-    <div class="content_container today__overview <%= threshold_class(calories: @today_items_data[:total_calories]) %>">
-      <strong>Overview</strong>
-      <p>Total Cals: <%= @today_items_data[:total_calories] %></p>
-      <hr>
-      <p class="t__medium">Desired Baseline: <%= Stats::BASELINE_CAL_COUNT %></p>
-    </div>
   </div>
 
   <div class="row_container">
     <h2 class="t__h2">Past 7 days</h2>
-    <%= render partial: "day", locals: { days_ago: 7, data: ::Item.data_from(days_ago: 7) } %>
-    <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 6, data: ::Item.data_from(days_ago: 6) } %>
-    <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 5, data: ::Item.data_from(days_ago: 5) } %>
-    <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 4, data: ::Item.data_from(days_ago: 4) } %>
-
-    <%= render partial: "day", locals: { days_ago: 3, data: ::Item.data_from(days_ago: 3) } %>
-    <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 2, data: ::Item.data_from(days_ago: 2) } %>
-    <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 1, data: ::Item.data_from(days_ago: 1) } %>
-    <div class="vertical_spacer__5"></div>
     <div class="content_container weekly__container <%= threshold_class(calories: @weekly_data[:average_calorie_intake]) %>">
       <strong>Overview</strong>
       <p class="t__medium">Total Calories: <%= @weekly_data[:total_calorie_intake] %></p>
       <p class="t__medium">Average Calories: <%= @weekly_data[:average_calorie_intake] %></p>
       <p class="t__medium">Desired Avg Baseline: <%= Stats::BASELINE_CAL_COUNT %></p>
     </div>
+    <div class="vertical_spacer__5"></div>
+    <%= render partial: "day", locals: { days_ago: 1, data: ::Item.data_from(days_ago: 1) } %>
+    <div class="vertical_spacer__5"></div>
+    <%= render partial: "day", locals: { days_ago: 2, data: ::Item.data_from(days_ago: 2) } %>
+    <div class="vertical_spacer__5"></div>
+    <%= render partial: "day", locals: { days_ago: 3, data: ::Item.data_from(days_ago: 3) } %>
+
+    <%= render partial: "day", locals: { days_ago: 4, data: ::Item.data_from(days_ago: 4) } %>
+    <div class="vertical_spacer__5"></div>
+    <%= render partial: "day", locals: { days_ago: 5, data: ::Item.data_from(days_ago: 5) } %>
+    <div class="vertical_spacer__5"></div>
+    <%= render partial: "day", locals: { days_ago: 6, data: ::Item.data_from(days_ago: 6) } %>
+    <div class="vertical_spacer__5"></div>
+    <%= render partial: "day", locals: { days_ago: 7, data: ::Item.data_from(days_ago: 7) } %>
   </div>
 
 </div>
