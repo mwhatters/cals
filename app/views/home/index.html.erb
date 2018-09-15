@@ -24,26 +24,65 @@
           <li>
             <strong><%= item.name %></strong> <span class="t__small">at <%= item.created_at.strftime("%I:%M %p") %></span>
             <ul>
-              <li class="li__nested t__small"><em><%= item.calories %></em> cals</li>
+              <li class="li__nested t__small">
+                <em><%= item.calories %></em> cals
+                <%= form_for item, method: :delete, html: { class: "u__ml__5 o__inline" } do |f| %>
+                  <%= f.submit "Delete", class: "destroy_button", data: { confirm: 'Are you sure?' } %>
+                <% end %>
+              </li>
             </ul>
           </li>
         <% end %>
-        
+      </ul>
+     <div class="horizontal_spacer_5"></div>
+      Inventory
+      <ul>
+        <% @inventory.each do |item| %>
+          <li>
+            <strong><%= item.name %></strong> 
+              <span class="t__small">
+              <% if item.expired? %>
+                <span class="c__red">expired</span>
+              <% else%>
+                expires on <%= item.expiry_date.strftime("%A") %>
+              <% end%>
+              </span>
+            <ul>
+              <li class="li__nested t__small">
+                <em class="o__inline"><%= item.calories %> cals</em>
+                <%= form_for item, method: :delete, html: { class: "u__ml__5 o__inline" } do |f| %>
+                  <%= f.submit "Delete", class: "destroy_button", data: { confirm: 'Are you sure?' } %>
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class="vertical_spacer__5"></div>
     <div class="content_container today__container">
       Add Item
       <%= form_with scope: :item, local: true, url: items_path do |form| %>
-        <p>
-          <%= form.label :name %><br>
+        <div class="horizontal_spacer_5"></div>
+        <div>
+          <span class="item_label">Name</span>
           <%= form.text_field :name %>
-        </p>
-      
-        <p>
-          <%= form.label :calories %><br>
+        </div>
+        <div class="horizontal_spacer_5"></div>
+        <div>
+          <span class="item_label">Calories</span>
           <%= form.number_field :calories %>
-        </p>
+        </div>
+        <div class="horizontal_spacer_5"></div>
+        <div>
+          <span class="item_label">Consumed?</span>
+          <%= form.check_box :consumed, { checked: true } %>
+        </div>
+        <div class="horizontal_spacer_5"></div>
+        <div>
+          <span class="item_label">Days Good for</span>
+          <%= form.number_field :days_good_for %>
+        </div>
         <p>
           <%= form.submit %>
         </p>
@@ -53,26 +92,26 @@
 
   <div class="row_container">
     <h2 class="t__h2">Past 7 days</h2>
-    <div class="content_container weekly__container <%= threshold_class(calories: @weekly_data[:average_calorie_intake]) %>">
+    <div class="content_container weekly__container <%= threshold_class(calories: @weekly_consumption_data[:average_calorie_intake]) %>">
       <strong>Overview</strong>
-      <p class="t__medium">Total Calories: <%= @weekly_data[:total_calorie_intake] %></p>
-      <p class="t__medium">Average Calories: <%= @weekly_data[:average_calorie_intake] %></p>
+      <p class="t__medium">Total Calories: <%= @weekly_consumption_data[:total_calorie_intake] %></p>
+      <p class="t__medium">Average Calories: <%= @weekly_consumption_data[:average_calorie_intake] %></p>
       <p class="t__medium">Desired Avg Baseline: <%= Stats::BASELINE_CAL_COUNT %></p>
     </div>
     <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 1, data: ::Item.data_from(days_ago: 1) } %>
+    <%= render partial: "day", locals: { days_ago: 1, data: @one_day_ago_items_data } %>
     <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 2, data: ::Item.data_from(days_ago: 2) } %>
+    <%= render partial: "day", locals: { days_ago: 2, data: @two_day_ago_items_data } %>
     <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 3, data: ::Item.data_from(days_ago: 3) } %>
+    <%= render partial: "day", locals: { days_ago: 3, data: @three_day_ago_items_data } %>
 
-    <%= render partial: "day", locals: { days_ago: 4, data: ::Item.data_from(days_ago: 4) } %>
+    <%= render partial: "day", locals: { days_ago: 4, data: @four_day_ago_items_data } %>
     <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 5, data: ::Item.data_from(days_ago: 5) } %>
+    <%= render partial: "day", locals: { days_ago: 5, data: @five_day_ago_items_data } %>
     <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 6, data: ::Item.data_from(days_ago: 6) } %>
+    <%= render partial: "day", locals: { days_ago: 6, data: @six_day_ago_items_data } %>
     <div class="vertical_spacer__5"></div>
-    <%= render partial: "day", locals: { days_ago: 7, data: ::Item.data_from(days_ago: 7) } %>
+    <%= render partial: "day", locals: { days_ago: 7, data: @seven_day_ago_items_data } %>
   </div>
 
 </div>
