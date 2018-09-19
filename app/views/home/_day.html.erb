@@ -1,6 +1,9 @@
     <div class="content_container weekly__container">
       <%= days_ago.day.ago.strftime("%A") %> <span class="t__small"><%= days_ago.day.ago.to_date %></span>
-      <p>Total Cals: <%= data[:total_calories] %></p>
+      <hr>
+      <div>Total Cals: <%= data[:total_calories] %></div>
+      <div>Weight: <%= "#{WeightEntry.weight_entry_from(days_ago: days_ago)&.weight} lbs" || "n/a" %></div>
+
       <ul>
         <% data[:items].each do |item| %>
           <li class="t__small"><strong><%= item.name %></strong> <em><%= item.calories %></em> cals</li>
