@@ -104,6 +104,34 @@
   </div>
 
   <div class="row_container">
+    <h2 class="t__h2">Streaks</h2>
+    <div class="content_container streaks__container">
+      <div class="horizontal_spacer_5"></div>
+      <% @streaks.each do |streak| %>
+        <div>
+          <%= streak.name %> - <span><%= streak.length %> Days</span> - <%= link_to "End this streak", streak_path(streak), method: :put %>
+        </div>
+        <div class="horizontal_spacer_5"></div>
+        <div class="horizontal_spacer_5"></div>
+      <% end %>
+      
+      <div class="horizontal_spacer_5"></div>
+      <div class="horizontal_spacer_5"></div>
+
+      <hr>
+
+      <%= form_with scope: :streak, local: true, url: streaks_path do |form| %>
+        <div class="horizontal_spacer_5"></div>
+        <span>
+          <span class="item_label">New Streak</span>
+          <%= form.text_field :name %>
+        </span>
+          <%= form.submit %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row_container">
     <h2 class="t__h2">Past 7 days</h2>
     <div class="content_container weekly__container <%= threshold_class(calories: @weekly_consumption_data[:average_calorie_intake]) %>">
       <strong>Overview</strong>

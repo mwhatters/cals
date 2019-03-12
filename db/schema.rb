@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180919160838) do
+ActiveRecord::Schema.define(version: 20190312031340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20180919160838) do
     t.datetime "updated_at", null: false
     t.boolean "consumed", default: true
     t.integer "days_good_for"
+  end
+
+  create_table "streaks", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "streak_started_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "weight_entries", force: :cascade do |t|

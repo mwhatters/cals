@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   resources :items
   resources :weight_entries
+  resources :streaks
 end

@@ -14,5 +14,6 @@ class HomeController < ApplicationController
 
     @inventory = ::Item.inventory
 
+    @streaks = Streak.all
   end
 end
