@@ -1,24 +1,3 @@
-# README
+I made an app to help regulate my calorie intake. i figured if i made the app myself i would be more inclined to use it.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+It's a ridiculous app but ive actually used it quite a few times and it has been effective 
